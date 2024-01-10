@@ -1,0 +1,32 @@
+<!-- cart.html -->
+{% extends "base.html" %}
+
+{% block title %}Корзина - TravelBoard{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1>Корзина</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Название тура</th>
+                    <th scope="col">Цена</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tour in tours %}
+                    <tr>
+                        <th scope="row">{{ loop.index }}</th>
+                        <td>{{ tour.title }}</td>
+                        <td>${{ tour.price }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p>Общая стоимость: ${{ total_price }}</p>
+        <form method="POST" action="{{ url_for('checkout') }}" class="mt-3">
+            <button type="submit" class="btn btn-primary">Заказать</button>
+        </form>
+    </div>
+{% endblock %}
